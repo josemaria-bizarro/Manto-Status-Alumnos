@@ -60,7 +60,7 @@ function actualizaTabla(datuak)
   try
   {
     werror= Notifiacion()
-    console.log("noti")
+  
   }
   catch(err)
   {

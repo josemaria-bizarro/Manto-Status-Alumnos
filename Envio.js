@@ -35,7 +35,7 @@ function enviar(SOLICITANTE,DIA,MOTIVO,ALUMNO,OPCION,CORREO,PLANTEL,FILA,STATUS)
     var bajak=0
 
     var fila=lsr
-    console.log(fila)
+    
       switch (STATUS)
         {
           
@@ -235,10 +235,11 @@ function enviar(SOLICITANTE,DIA,MOTIVO,ALUMNO,OPCION,CORREO,PLANTEL,FILA,STATUS)
                 SheetDATA.getRange(fila,17).setValue("ACTUALIZADO");
                 statusPar="ACTIVO"
                 }
-                catch
+                catch (err)
                 {
                   SheetDATA.getRange(fila,17).setValue("ERROR");
                   wserror=1;
+                  console.log(err)
                 }
           break;
           
@@ -288,9 +289,10 @@ function enviar(SOLICITANTE,DIA,MOTIVO,ALUMNO,OPCION,CORREO,PLANTEL,FILA,STATUS)
                 statusPar="BAJA"
                 ikasleSheet.getRange(wilara,1).setValue(NOMBAJA);//MODIFICA EL NOMBRE DE ALUMNOS DADOS DE BAJA  
             }
-            ikasleSheet.getRange(wilara,13).setValue(STATUS);//COLOCA EL STATUS EN EL CATALOGO DE ALUMNOS
-            ikasleSheet.getRange(wilara,14).setValue(statusPar);//COLOCA EL STATUS PARCIAL EN EL CATALOGO DE ALUMNOS
-            ikasleSheet.getRange(wilara,40).setValue(DIA);//COLOCA LA FECHA DE ULTIMO MOVMTO EN EL CATALOGO DE ALUMNOS
+          ikasleSheet.getRange(wilara,13).setValue(STATUS);//COLOCA EL STATUS EN EL CATALOGO DE ALUMNOS
+          console.log(statusPar)
+          ikasleSheet.getRange(wilara,14).setValue(statusPar);//COLOCA EL STATUS PARCIAL EN EL CATALOGO DE ALUMNOS
+          ikasleSheet.getRange(wilara,40).setValue(DIA);//COLOCA LA FECHA DE ULTIMO MOVMTO EN EL CATALOGO DE ALUMNOS
       }
       else
       {
