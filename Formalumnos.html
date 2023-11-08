@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="es-Mx">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cambio de Status de Alumnos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+    <?!= include('CSS') ?> <!-- aqui se incluyen los datos css -->
+  </head>
+  
+  <body>
+    <div class="encabeza">
+        <img src="https://drive.google.com/uc?export=view&id=1FWmr4utpKYRcFSRTz-XQTvQyudbHZvMw"alt="logo">
+        <h1 class="titulo">Cambio de Status</h1>
+    </div>
+
+    <p style="color: Dodgerblue;size:8px; margin-left:50px; margin-right:50px; ">Ingresa algun texto para la busqueda de alumno </p>
+
+    
+    <form id="formManto" onsubmit="actualiza(this)"> <!-- nombre del formulario que almacena los datos-->
+      <div class="formulario"> <!-- El nombre de ésta división -->
+
+        <div class="elemento1"> <!-- Lista desplegable de alumnos -->
+            <label for="alumnosDataList" class="form-label" >Alumno</label>
+            <input class="form-control" list="datalistOptions" id="alumnosDataList" placeholder="Escribe para buscar..." onchange="actualizarInfo(this)" size="50" >
+            <datalist id="datalistOptions">
+            </datalist>
+        </div>
+
+        <div class="elemento2">
+            <label for="correoInst" class="form-label">Correo Institucional</label>
+            <br>
+            <input type="email" class="form-control"  id="correoInst" size="40"readonly> 
+        </div>
+
+        <div class="elemento3">
+            <label for="opcEdu" class="form-label">Opción Educativa</label>
+            <br>
+            <input type="text" class="form-control" id="opcEdu" size="25"readonly>
+        </div>
+
+        <div class="elemento4">
+             <label for="grupoActivo" class="form-label">Grupo Activo</label>
+             <br>
+             <input type="text" class="form-control" id="grupoActivo" size= "8"readonly>
+        </div>
+
+        <div class="elemento6">
+            <label for="statAct" class="form-label">Status Actual</label>
+            <br>
+            <input type="text" class="form-control" id="statAct"readonly>
+        </div>
+
+      
+        <div class="elemento7">
+           <label for="solicita">Solicitante</label>
+           <br>
+            <select class="form-select1" aria-label="solicita" name="solicita" id="solicita" >
+              <option value=""></option>
+              <option value="Natalia Alanis">Natalia Alanis</option>
+              <option value="Vene Villarreal">Vene Villarreal</option>
+              <option value="Narciso Gómez">Narciso Gómez</option>
+              <option value="Krishna Argumedo">Krishna Argumedo</option>
+              <option value="Gabriela Hernández">Gabriela Hernández</option>
+            </select>
+        </div>
+
+        <div class="elemento8">
+              <label for="fecSol" class="form-label">Fecha Solicitud</label>
+              <br>
+              <input type="date" class="form-control" id="fecSol">
+        </div>
+
+        <div class="elemento9">
+            <label for="medSol">Medio Solicitud</label>
+            <br>
+            <select class="form-select" aria-label="medSol" name="medSol" id="medSol" size="1">
+              <option value=""></option>
+              <option value="Whatsapp">Whatsapp</option>
+              <option value="Presencial">Presencial</option>
+              <option value="Teléfono">Teléfono</option>
+              <option value="Correo">Correo</option>
+            </select>
+        </div>
+
+        <div class="elemento10">
+          <label for="staNvo" class="form-label">Status Nuevo</label>
+          <br>
+          <select class="form-select" aria-label="staNvo" name="staNvo" id="staNvo" size="1">
+              <option value=""></option>
+              <option value="SUSPENSIÓN DE AULAS">suspensión</option>
+              <option value="REACTIVACIÓN DE AULAS">Reactivación</option>
+              <option value="BAJA ADMINISTRATIVA">Baja Admva</option>
+              <option value="BAJA TEMPORAL">Baja Temp</option>
+              <option value="BAJA DEFINITIVA">Baja Def</option>
+              <option value="CONCLUIDO">Concluido</option>
+              <option value="EGRESADO">Egresado</option>
+              <option value="RECURSADOR">Recursador</option>
+              <option value="ACTIVO">Activo</option>
+          </select>
+        </div>
+
+        <div class="elemento11">
+          <label form="resp" class="form-label">Responsable</label>
+          <br>
+          <select class="form-select" aria-label="resp" name="resp" id="resp" size="1">
+            <option value=""></option>
+            <option value="JOSEMARIA">Josemaría</option>
+          </select>
+        </div>
+
+        <div class="elemento12">
+          <label for="motivo" class="form-label">Motivo</label>
+          <br>
+          <input type="text" class="form-control" id="motivo">
+        </div>
+      </div>  
+      <br>
+    
+      <button class="button" type="submit" >Actualizar</button>
+      
+    </form>
+    
+    <?!= include('JS') ?> <!-- aqui se incluyen los datos script -->
+
+  </body>
+</html>

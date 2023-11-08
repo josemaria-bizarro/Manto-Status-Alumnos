@@ -1,0 +1,181 @@
+<script>
+    window.addEventListener("load",loadInfoDatalist)
+    
+    const ikasleIzena= document.getElementById("datalistOptions"); //todos los datos de la BD
+   
+
+
+    function loadInfoDatalist()
+    {
+      google.script.run
+      .withSuccessHandler(cargarDatalist)   //si la carga de alumnos fue exitosa ejecuta esta rutina
+      .withFailureHandler(proc=>{console.log("error al cargar datalist")})
+      .DataAlumnos()  //Obtiene los datos de la BD de alumnos
+
+    }
+
+    function cargarDatalist(dataAlumnos)  //toma los datos de la BD y los carga en el datalist
+    {
+    
+      const inputAlumnos = document.getElementById("datalistOptions");  //formulario html datalist id
+      
+      dataAlumnos.forEach(alumno => 
+      {
+       
+        const ilara=document.createElement("option") //crea un elemento en el datalist con los datos de cada alumno
+        ilara.value = alumno[0];
+      
+        
+        ilara.dataset.correoInst=alumno[1];
+        
+        matricula=alumno[2];
+        gpoBase=alumno[3];
+        sbGpoB=alumno[4];
+        ilara.dataset.grupoActivo=alumno[5]+" "+alumno[6];
+        //ilara.dataset.subGrupo=alumno[6];
+        ftermina=alumno[7];
+        turno=alumno[8];
+        
+        ilara.dataset.opcEdu=alumno[9];
+        fIngresa=alumno[10];
+        cicloI=alumno[11];
+        ilara.dataset.statAct=alumno[12];
+        var fecHoy = dateFormater()
+        ilara.dataset.fecSol=fecHoy //new Date().toLocaleDateString("yyyy-MM-dd")
+        
+        statParc=alumno[13];
+        ilara.dataset.sexo=alumno[14];
+        ilara.dataset.fecNac=alumno[15];
+        ilara.dataset.nomTut=alumno[16];
+        ilara.dataset.correoTutor=alumno[17];
+        ilara.dataset.telCasaTutor=alumno[18];
+        ilara.dataset.celTutor=alumno[19];
+        rec=alumno[20];
+        obs=alumno[21];
+        pantel=alumno[22];
+        numCtl=alumno[23];
+        grupBasOr=alumno[24];
+        grupActOr=alumno[25];
+        usrCap=alumno[26];
+        folio=alumno[27];
+        fecIns=alumno[28];
+        sgrupActOr=alumno[29];
+        campo=alumno[30];
+        ilara.dataset.celAlumno=alumno[31];
+        ilara.dataset.correoAlumno=alumno[32];
+        ilara.dataset.nomTutor2=alumno[33];
+        ilara.dataset.celTut2=alumno[34];
+        ilara.dataset.direccion=alumno[35];
+        ilara.dataset.correoTutor2=alumno[36];
+        actDat=alumno[37];
+        corrTutAnt=alumno[38];
+        fecUmov=alumno[39];
+        ilara.dataset.curp=alumno[40];
+        ilara.dataset.taller=alumno[41];
+        edad=alumno[42];
+        ilara.dataset.escProcede=alumno[43];
+        inputAlumnos.appendChild(ilara);
+        
+      })
+              
+
+    }
+
+function dateFormater() 
+{
+  var date=new Date()
+  var separator ="-"
+  var day = date.getDate();
+  // add +1 to month because getMonth() returns month from 0 to 11
+  var month = date.getMonth() + 1;
+  var year = date.getFullYear();
+
+  // show date and month in two digits
+  // if month is less than 10, add a 0 before it
+  if (day < 10) {
+    day = '0' + day;
+  }
+  if (month < 10) {
+    month = '0' + month;
+  }
+
+  // now we have day, month and year
+  // use the separator to join them
+  var fecHoy = year + separator + month + separator + day;
+  return fecHoy;
+}
+
+// ***************************************************************************
+// RELLENA LOS CAMPOS DEL FORMULARIO
+
+    function actualizarInfo(datalist) //carga los datos del formulario una vez que se detecta un cambio
+    //datalist es el nombre seleccionado en la lista desplegable
+    //ikasleizena son los datos cargados en el documento
+    {    
+      
+      for(let i=0;i<ikasleIzena.options.length; i++)
+      {
+         if(ikasleIzena.options[i].value == datalist.value)
+            {
+               document.getElementById("correoInst").value=ikasleIzena.options[i].getAttribute("data-correo-Inst");
+               document.getElementById("opcEdu").value=ikasleIzena.options[i].getAttribute("data-opc-Edu");
+               document.getElementById("grupoActivo").value=ikasleIzena.options[i].getAttribute("data-grupo-Activo");
+               document.getElementById('statAct').value= ikasleIzena.options[i].getAttribute("data-stat-Act");
+               document.getElementById('fecSol').value= ikasleIzena.options[i].getAttribute("data-fec-Sol");
+               
+               break;
+            }
+      }
+    }
+
+
+
+
+function actualiza()
+{
+          let espacios="";
+          event.preventDefault();
+          let datuak=[];
+          const form = document.getElementById('formManto');
+          // COSTRUYE ARRAY DE SALIDA EN HOJA
+          
+           datuak.push( form[5].value,     //solicitante
+                        form[6].value,     //fecha solicitud
+                        form[7].value,     //medio solcitante
+                        form[10].value,     //motivo
+                        form[0].value,      //alumno
+                        form[2].value,      // opc edu
+                        form[1].value,      //cta institucion
+                        form[3].value.slice(0,3),           //grupo activo
+                        form[3].value.slice(3),           //subgrupo
+                        pantel,           //plantel
+                        "",               //fila
+                        form[4].value,    //estatus act
+                        form[8].value,    //estatus nvo
+                        "",               //espacio
+                        form[9].value     //responsable
+                      )
+
+          google.script.run
+          .withFailureHandler(error=>{console.log("Error en los datos a grabars")})
+          .withSuccessHandler(erroralcargar)
+          .actualizaTabla(datuak);
+
+      
+        document.getElementById("formManto").reset()
+
+}
+        
+
+function erroralcargar(wserror)
+{ if (wserror==1)
+    {
+      alert("   \n     ERROR EN EL PROCESO \n **** ALUMNO NO ACTUALIZADO *****")
+    }
+    else
+    {
+      alert("**************************\n     . \n Cambios realizados, \nrecargue la página (F5)")
+    }
+}
+
+</script>
